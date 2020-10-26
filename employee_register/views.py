@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import EmployeeForm
 from .models import Employee
 
 
+@login_required
 def employee_list(request):
     context = {
         'employee_list': Employee.objects.all()
@@ -10,6 +12,7 @@ def employee_list(request):
     return render(request, 'employee_register/employee_list.html', context)
 
 
+@login_required
 def employee_form(request, id=0):
     if request.method == "GET":
         if id == 0:
